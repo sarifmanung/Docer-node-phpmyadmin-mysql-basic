@@ -24,6 +24,10 @@ app.get("/hello-world", (req, res) => {
   res.send("hello world");
 });
 
+app.get("/", (req, res) => {
+  res.redirect("/users");
+});
+
 app.get("/users", async (req, res) => {
   try {
     const [results] = await conn.query("SELECT * FROM users");
@@ -32,6 +36,10 @@ app.get("/users", async (req, res) => {
     console.error(error);
     res.status(500).send("Error retrieving users.\n", error);
   }
+});
+
+app.get("*", (req, res) => {
+  res.send("404 not found");
 });
 
 app.listen(port, async () => {
