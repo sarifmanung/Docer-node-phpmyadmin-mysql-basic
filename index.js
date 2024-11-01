@@ -28,6 +28,7 @@ app.get("/", (req, res) => {
   res.redirect("/users");
 });
 
+// get /users all
 app.get("/users", async (req, res) => {
   try {
     const [results] = await conn.query("SELECT * FROM users");
